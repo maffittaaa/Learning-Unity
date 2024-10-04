@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 [System.Serializable] //should be saved on the disk
 public class OnPlayerHealthChanged : UnityEvent<float> {} //declaration of an event with parameters
@@ -27,7 +29,13 @@ public class HealthComponent : MonoBehaviour
         currentHealth -= damageAmount;
         normalizedHealth = currentHealth / MaxHealth;
 
-        OnPlayerHealthChangedEvent.Invoke(normalizedHealth); 
+        OnPlayerHealthChangedEvent.Invoke(normalizedHealth);
+
+        if (normalizedHealth <= 0.0f)
+        {
+            RestartGame();
+        }
+
     }
 
     public void HealDamage(float healthAmount)
@@ -37,4 +45,10 @@ public class HealthComponent : MonoBehaviour
 
         OnPlayerHealthChangedEvent.Invoke(normalizedHealth);
     }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    
 }
