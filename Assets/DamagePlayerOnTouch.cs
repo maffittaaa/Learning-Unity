@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class DamagePlayerOnTouch : MonoBehaviour
 {
-    [SerializeField] private float DamageToDeal = 1;
+    [SerializeField] private float DamageToDeal = 1.2f;
     private void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.gameObject.CompareTag("Player"))
