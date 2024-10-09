@@ -13,6 +13,7 @@ public class RegenHealthToPlayer : MonoBehaviour
             if (healthComponent && healthComponent.CanHealAmount(HealthToRegen))
             {
                 healthComponent.HealDamage(HealthToRegen);
+                Destroy(gameObject);
             }
         }
     }
